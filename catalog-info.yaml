@@ -8,7 +8,7 @@ metadata:
     github.com/project-slug: roadiehq/backstage-plugin-aws-auth
   tags:
     - plugin
-    - OSS
+    - oss
 spec:
   type: library
   owner: group:roadie
