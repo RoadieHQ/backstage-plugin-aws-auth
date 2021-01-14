@@ -2,9 +2,9 @@
 
 Backend plugin that generates temporary credentials in order to perform requests to aws services from backstage's frontend
 
-## Usage
+## Example usage
 
-This is how you set api keys when using aws sdk:
+This is an example how you set api keys in your frontend application when using aws sdk:
 
 ```js
 async function generateCredentials(backendUrl: string) {
@@ -24,7 +24,7 @@ Please create an IAM user (with api keys capabilities) with permissions as littl
 
 then, please set environment variables with api keys from previously create IAM user.
 
-Then run plugin as standalone:
+You can run plugin locally as standalone by:
 
 ```bash
 export AWS_ACCESS_KEY_ID=x
@@ -32,7 +32,13 @@ export AWS_ACCESS_KEY_SECRET=x
 yarn start
 ```
 
-or add it to backstage:
+To add plugin to the backstage app, you have to install it in the `packages/backend` directory:
+
+```bash
+yarn add @roadiehq/backstage-plugin-aws-auth
+```
+
+And paste following code snippets:
 
 ```js
 // packages/backend/src/plugins/aws.ts
