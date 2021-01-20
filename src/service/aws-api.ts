@@ -15,7 +15,7 @@
  */
 import express from 'express';
 import { Logger } from 'winston';
-import AWS from 'aws-sdk';
+import { generateTemporaryCredentials } from './generateTemporaryCredentials';
 
 export type LambdaData = {
   region: string;
@@ -27,36 +27,19 @@ export type LambdaData = {
   memory: number;
 };
 
-async function generateTemporaryCredentials(
-  AWS_ACCESS_KEY_ID: string,
-  AWS_ACCESS_KEY_SECRET: string,
-) {
-  AWS.config.credentials = new AWS.Credentials({
-    accessKeyId: AWS_ACCESS_KEY_ID,
-    secretAccessKey: AWS_ACCESS_KEY_SECRET,
-  });
-
-  const creds = await new AWS.STS()
-    .getSessionToken({
-      DurationSeconds: 900,
-    })
-    .promise();
-  return creds;
-}
-
 export function getAwsApiGenerateTempCredentialsForwarder(
   AWS_ACCESS_KEY_ID: string,
   AWS_ACCESS_KEY_SECRET: string,
-  logger: Logger,
+  logger: Logger
 ) {
   return async function forwardRequest(
     _: express.Request,
-    response: express.Response,
+    response: express.Response
   ) {
     try {
       const credentials = await generateTemporaryCredentials(
         AWS_ACCESS_KEY_ID,
-        AWS_ACCESS_KEY_SECRET,
+        AWS_ACCESS_KEY_SECRET
       );
       return response.json(credentials.Credentials);
     } catch (e) {
