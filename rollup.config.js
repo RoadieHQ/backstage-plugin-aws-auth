@@ -34,7 +34,7 @@ export default [{
 },
 
 {
-  input: 'dist-types/index.d.ts',
+  input: 'dist-types/src/index.d.ts',
   output: {
     file: 'dist/index.d.ts',
     format: 'es',
