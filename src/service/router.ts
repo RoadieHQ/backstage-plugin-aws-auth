@@ -25,20 +25,15 @@ export async function createRouter(logger: Logger): Promise<express.Router> {
   const AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID;
   const AWS_ACCESS_KEY_SECRET = process.env.AWS_ACCESS_KEY_SECRET;
   if (!AWS_ACCESS_KEY_ID || !AWS_ACCESS_KEY_SECRET) {
-    if (process.env.NODE_ENV !== 'development') {
-      throw new Error(
-        'AWS api tokens must be provided in AWS_ACCESS_KEY_ID and AWS_ACCESS_KEY_SECRET environment variables to start the API.',
-      );
-    }
     logger.warn(
-      'Failed to initialize AWS backend, set AWS_ACCESS_KEY_ID and AWS_ACCESS_KEY_SECRET environment variable to start the API.',
+      'AWS_ACCESS_KEY_ID and AWS_ACCESS_KEY_SECRET environment variables not set. Using default credentials provider chain.',
     );
   } else {
-    const awsApiGenerateTempCredentialsForwarder = getAwsApiGenerateTempCredentialsForwarder(
+    const awsApiGenerateTempCredentialsForwarder = getAwsApiGenerateTempCredentialsForwarder({
       AWS_ACCESS_KEY_ID,
       AWS_ACCESS_KEY_SECRET,
       logger,
-    );
+    });
     router.use('/credentials', awsApiGenerateTempCredentialsForwarder);
   }
 
