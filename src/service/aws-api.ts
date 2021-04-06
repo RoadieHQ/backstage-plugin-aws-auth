@@ -27,10 +27,15 @@ export type LambdaData = {
   memory: number;
 };
 
-export function getAwsApiGenerateTempCredentialsForwarder(
-  AWS_ACCESS_KEY_ID: string,
-  AWS_ACCESS_KEY_SECRET: string,
-  logger: Logger
+export function getAwsApiGenerateTempCredentialsForwarder({
+  AWS_ACCESS_KEY_ID,
+  AWS_ACCESS_KEY_SECRET,
+  logger,
+}: {
+  AWS_ACCESS_KEY_ID?: string,
+  AWS_ACCESS_KEY_SECRET?: string,
+  logger: Logger,
+}
 ) {
   return async function forwardRequest(
     _: express.Request,

@@ -38,11 +38,11 @@ describe('aws-api', () => {
   });
 
   it('should respond with auth creds in json', async () => {
-    const awsApiGenerateTempCredentialsForwarder = getAwsApiGenerateTempCredentialsForwarder(
-      keyIdStub,
-      keySecretStub,
-      mockLogger
-    );
+    const awsApiGenerateTempCredentialsForwarder = getAwsApiGenerateTempCredentialsForwarder({
+      AWS_ACCESS_KEY_ID: keyIdStub,
+      AWS_ACCESS_KEY_SECRET: keySecretStub,
+      logger: mockLogger
+    });
 
     const mockResponse = () => {
       const res = { json: jest.fn };
