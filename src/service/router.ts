@@ -24,6 +24,7 @@ export async function createRouter(logger: Logger): Promise<express.Router> {
 
   const AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID;
   const AWS_ACCESS_KEY_SECRET = process.env.AWS_ACCESS_KEY_SECRET;
+  const AWS_ROLE_ARN = process.env.AWS_ROLE_ARN;
   if (!AWS_ACCESS_KEY_ID || !AWS_ACCESS_KEY_SECRET) {
     logger.warn(
       'AWS_ACCESS_KEY_ID and AWS_ACCESS_KEY_SECRET environment variables not set. Using default credentials provider chain.',
@@ -32,6 +33,7 @@ export async function createRouter(logger: Logger): Promise<express.Router> {
   const awsApiGenerateTempCredentialsForwarder = getAwsApiGenerateTempCredentialsForwarder({
     AWS_ACCESS_KEY_ID,
     AWS_ACCESS_KEY_SECRET,
+    AWS_ROLE_ARN,
     logger,
   });
   router.use('/credentials', awsApiGenerateTempCredentialsForwarder);

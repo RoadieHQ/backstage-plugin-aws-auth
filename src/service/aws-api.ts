@@ -30,10 +30,12 @@ export type LambdaData = {
 export function getAwsApiGenerateTempCredentialsForwarder({
   AWS_ACCESS_KEY_ID,
   AWS_ACCESS_KEY_SECRET,
+  AWS_ROLE_ARN,
   logger,
 }: {
   AWS_ACCESS_KEY_ID?: string,
   AWS_ACCESS_KEY_SECRET?: string,
+  AWS_ROLE_ARN?: string,
   logger: Logger,
 }
 ) {
@@ -44,7 +46,8 @@ export function getAwsApiGenerateTempCredentialsForwarder({
     try {
       const credentials = await generateTemporaryCredentials(
         AWS_ACCESS_KEY_ID,
-        AWS_ACCESS_KEY_SECRET
+        AWS_ACCESS_KEY_SECRET,
+        AWS_ROLE_ARN
       );
       return response.json(credentials.Credentials);
     } catch (e) {
