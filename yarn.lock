@@ -933,16 +933,16 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@backstage/backend-common@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@backstage/backend-common/-/backend-common-0.7.0.tgz#3121293d404765f11a4488c165e634acab7ad1a1"
-  integrity sha512-4IAJjzLVna81cjkedm1GuhNzik5TPKptGWJfqwKAJ1pkVfoviMvB6nfvDYfXIWynd7GZmiRR+C9eR3M+dxx8PQ==
+"@backstage/backend-common@^0.8.0":
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/@backstage/backend-common/-/backend-common-0.8.1.tgz#71d9e38386fa2b0354a7c8a058ee55299a499dec"
+  integrity sha512-uR5WNWmz7HpCaL6ghwW1ioWcG34VY7kvPFb0uuNCgVVUvFh12hxwQih8KvgMWZYhK/C2+QtpHzX8bKPIdp5gtA==
   dependencies:
     "@backstage/cli-common" "^0.1.1"
     "@backstage/config" "^0.1.5"
-    "@backstage/config-loader" "^0.6.1"
+    "@backstage/config-loader" "^0.6.2"
     "@backstage/errors" "^0.1.1"
-    "@backstage/integration" "^0.5.2"
+    "@backstage/integration" "^0.5.3"
     "@google-cloud/storage" "^5.8.0"
     "@octokit/rest" "^18.5.3"
     "@types/cors" "^2.8.6"
@@ -960,6 +960,8 @@
     git-url-parse "^11.4.4"
     helmet "^4.0.0"
     isomorphic-git "^1.8.0"
+    keyv "^4.0.3"
+    keyv-memcache "^1.2.5"
     knex "^0.95.1"
     lodash "^4.17.15"
     logform "^2.1.1"
@@ -972,6 +974,7 @@
     tar "^6.0.5"
     unzipper "^0.10.11"
     winston "^3.2.1"
+    yn "^4.0.0"
 
 "@backstage/catalog-client@^0.3.8":
   version "0.3.8"
@@ -1110,7 +1113,7 @@
     yaml "^1.9.2"
     yup "^0.29.3"
 
-"@backstage/config-loader@^0.6.1":
+"@backstage/config-loader@^0.6.2":
   version "0.6.3"
   resolved "https://registry.yarnpkg.com/@backstage/config-loader/-/config-loader-0.6.3.tgz#7719603f2fd9a7000c1fef7127a0f806465f0a7c"
   integrity sha512-V1yLKJsmYPJV5SfqZyoIhhHTnbKLn8nLwdG5m38bEQDCpjEQWLnb0MMFLo+sKaPDfm5Xf2vABmkBOPc8Zit8Ww==
@@ -1232,10 +1235,10 @@
     cross-fetch "^3.0.6"
     serialize-error "^8.0.1"
 
-"@backstage/integration@^0.5.2":
-  version "0.5.4"
-  resolved "https://registry.yarnpkg.com/@backstage/integration/-/integration-0.5.4.tgz#dc79984b4895af95e53b7a619e95c2028f5dbd81"
-  integrity sha512-eYSudFfami3eXECCtJEXSHp9uGIjlly9BFyuEJbmsKA4dlsBGsH162qnfdpEcfd4AG+oo8jeJsgDcz92Cl3bWA==
+"@backstage/integration@^0.5.3":
+  version "0.5.5"
+  resolved "https://registry.yarnpkg.com/@backstage/integration/-/integration-0.5.5.tgz#f29cbc1739cfd5c58f21ebbbbf529a61e6930de6"
+  integrity sha512-ufwNdhEw2s6QflygcUu5JCY34k9f2ikOx/XbZFVNQ/kKCl/mR025auOWRBWN28G+IIuOLI5I5VlaSbKZOxBzTg==
   dependencies:
     "@backstage/config" "^0.1.5"
     "@octokit/auth-app" "^3.4.0"
@@ -8531,6 +8534,11 @@ json-bigint@^1.0.0:
   dependencies:
     bignumber.js "^9.0.0"
 
+json-buffer@3.0.1, json-buffer@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/json-buffer/-/json-buffer-3.0.1.tgz#9338802a30d3b6605fbe0613e094008ca8c05a13"
+  integrity sha512-4bV5BfR2mqfQTJm+V5tPPdf+ZpuhiIvTuAB5g8kcrXOZpTT/QwwVRWBywX1ozr6lEuPdbHxwaJlm9G6mI2sfSQ==
+
 json-parse-better-errors@^1.0.1, json-parse-better-errors@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/json-parse-better-errors/-/json-parse-better-errors-1.0.2.tgz#bb867cfb3450e69107c131d1c514bab3dc8bcaa9"
@@ -8797,6 +8805,21 @@ jws@^4.0.0:
   dependencies:
     jwa "^2.0.0"
     safe-buffer "^5.0.1"
+
+keyv-memcache@^1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/keyv-memcache/-/keyv-memcache-1.2.5.tgz#9097af5c617dc740e7300ebfd4a2efb8917429e3"
+  integrity sha512-iG+GHlhXyV83gmlCtMFIqNYVvv0i0towAy42NvziUR7D+k9jp81fAq0lu66H4gooOnW+ojkdigRvRpL40j1f7w==
+  dependencies:
+    json-buffer "^3.0.1"
+    memjs "^1.3.0"
+
+keyv@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/keyv/-/keyv-4.0.3.tgz#4f3aa98de254803cafcd2896734108daa35e4254"
+  integrity sha512-zdGa2TOpSZPq5mU6iowDARnMBZgtCqJ11dJROFi6tg6kTn4nuUdU09lFyLFSaHrWqpIJ+EBq4E8/Dc0Vx5vLdA==
+  dependencies:
+    json-buffer "3.0.1"
 
 killable@^1.0.1:
   version "1.0.1"
@@ -9354,6 +9377,11 @@ media-typer@0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
   integrity sha1-hxDXrwqmJvj/+hzgAWhUUmMlV0g=
+
+memjs@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/memjs/-/memjs-1.3.0.tgz#b7959b4ff3770e4c785463fd147f1e4fafd47a24"
+  integrity sha512-y/V9a0auepA9Lgyr4QieK6K2FczjHucEdTpSS+hHVNmVEkYxruXhkHu8n6DSRQ4HXHEE3cc6Sf9f88WCJXGXsQ==
 
 memoize-one@^5.1.1:
   version "5.1.1"
