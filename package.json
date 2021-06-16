@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@backstage/backend-common": "^0.7.0",
-    "@types/express": "^4.17.11",
+    "@types/express": "^4.17.12",
     "aws-sdk": "^2.902.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
