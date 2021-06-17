@@ -49,7 +49,6 @@ export function getAwsApiGenerateTempCredentialsForwarder({
       );
       return response.json(credentials.Credentials);
     } catch (e) {
-      console.log(e);
       logger.error(e);
       return response.status(500).json({ message: e.message });
     }
