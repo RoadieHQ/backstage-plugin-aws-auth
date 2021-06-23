@@ -18,6 +18,23 @@ async function generateCredentials(backendUrl: string) {
 AWS.config.credentials = await generateCredentials(backendUrl);
 ```
 
+### Using an IAM Role for Cross-account
+
+You can specify an AWS IAM Role Arn in the body of the request to facilitate cross-account lookups via the Assume Role methodology. You will need to ensure the IAM credentials made available to Backstage have the `sts:AssumeRole` in its attached IAM policy.
+
+```js
+async function generateCredentials(backendUrl: string) {
+  const reqBody = JSON.stringify({ RoleArn: 'arn:aws:iam::0123456789012:role/Example' });
+  const resp = await (await fetch(`${backendUrl}/aws/credentials`, { body: reqBody })).json();
+  return new AWS.Credentials({
+    accessKeyId: resp.AccessKeyId,
+    secretAccessKey: resp.SecretAccessKey,
+    sessionToken: resp.SessionToken,
+  });
+}
+AWS.config.credentials = await generateCredentials(backendUrl);
+```
+
 ## Starting the Auth Backend
 
 Please create an IAM user (with api keys capabilities) with permissions as little as possible to perform actions from backstage (e.g. only operation lambda:GetFunction with specified resource list)
