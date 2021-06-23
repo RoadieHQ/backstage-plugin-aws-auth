@@ -34,7 +34,7 @@ const mockLogger = winston.createLogger();
 
 describe('aws-api', () => {
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('should respond with auth creds in json', async () => {
