@@ -44,7 +44,8 @@ export function getAwsApiGenerateTempCredentialsForwarder({
     try {
       const credentials = await generateTemporaryCredentials(
         AWS_ACCESS_KEY_ID,
-        AWS_ACCESS_KEY_SECRET
+        AWS_ACCESS_KEY_SECRET,
+        _.body ? _.body.RoleArn : undefined
       );
       return response.json(credentials.Credentials);
     } catch (e) {

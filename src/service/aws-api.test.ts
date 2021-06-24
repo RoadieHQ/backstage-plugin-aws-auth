@@ -22,9 +22,9 @@ const generateTemporaryCredentials = require('./generateTemporaryCredentials.ts'
 const credentialsStub = 'CREDENTIALS_STUB';
 const keyIdStub = 'TEST_KEY_ID';
 const keySecretStub = 'TEST_KEY_SECRET';
+const roleArnStub = 'arn:aws:iam::123456789012:role/TEST_ROLE';
 
-// eslint-disable-next-line
-var generateTemporaryCredentialsMock = jest.fn((_: string, _2: string) => ({
+const generateTemporaryCredentialsMock = jest.fn((_: string, _2: string, _3: string) => ({
   Credentials: credentialsStub,
 }));
 
@@ -34,10 +34,11 @@ const mockLogger = winston.createLogger();
 
 describe('aws-api', () => {
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('should respond with auth creds in json', async () => {
+
     const awsApiGenerateTempCredentialsForwarder = getAwsApiGenerateTempCredentialsForwarder({
       AWS_ACCESS_KEY_ID: keyIdStub,
       AWS_ACCESS_KEY_SECRET: keySecretStub,
@@ -58,7 +59,35 @@ describe('aws-api', () => {
     expect((await response).json).toBeCalledWith(credentialsStub);
     expect(generateTemporaryCredentialsMock).toBeCalledWith(
       keyIdStub,
-      keySecretStub
+      keySecretStub,
+      undefined
     );
   });
+
+  it('should respond with auth creds in json with roleArn', async () => {
+    const awsApiGenerateTempCredentialsForwarder = getAwsApiGenerateTempCredentialsForwarder({
+      AWS_ACCESS_KEY_ID: keyIdStub,
+      AWS_ACCESS_KEY_SECRET: keySecretStub,
+      logger: mockLogger
+    });
+
+    const mockResponse = () => {
+      const res = { json: jest.fn };
+      res.json = jest.fn().mockReturnValue(res);
+      return res as any;
+    };
+
+    const response = awsApiGenerateTempCredentialsForwarder(
+      { body: { RoleArn: roleArnStub } } as any,
+      mockResponse()
+    );
+
+    expect((await response).json).toBeCalledWith(credentialsStub);
+    expect(generateTemporaryCredentialsMock).toBeCalledWith(
+      keyIdStub,
+      keySecretStub,
+      roleArnStub
+    );
+  });
+
 });
